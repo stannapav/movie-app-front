@@ -1,0 +1,35 @@
+.header {
+    background-color: #1a1a1a;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.website-title {
+    color: #ffffff;
+    margin: 0;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.website-title:hover {
+    color: #e50914;
+}
+
+.auth-button {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: #f40612;
+} 

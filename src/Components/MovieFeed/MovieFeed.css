@@ -34,4 +34,59 @@
 
 .pagination span {
     font-size: 16px;
+}
+
+.movie-feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #1a1a1a;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.movie-feed-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.user-name {
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    background-color: #e50914;
+    border-radius: 4px;
+}
+
+.login-button-header {
+    padding: 0.3rem 0.8rem;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.2s;
+}
+
+.login-button-header:hover {
+    background-color: #f40612;
+}
+
+.login-button {
+    padding: 0.3rem 0.8rem;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.2s;
+}
+
+.login-button:hover {
+    background-color: #f40612;
 } 

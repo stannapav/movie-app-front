@@ -1,16 +1,32 @@
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { MovieCard } from "../MovieCard/MovieCard";
 import { MovieSearchBar } from "../MovieSearchBar/MovieSearchBar";
+import Header from '../Header/Header';
 import type { Movie } from "../../Types/Movie";
+import type { UserDTO } from "../../Types/UserDTO";
 import "./MovieFeed.css";
 
 export const MovieFeed = () => {
+  const navigate = useNavigate();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [genreId, setGenreId] = useState<number | null>(null);
+  const [user, setUser] = useState<UserDTO | null>(null);
+
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    navigate('/logout');
+};
 
   const fetchMovies = async (page: number, search: string, genreId: number | null) => {
     setLoading(true);
@@ -76,30 +92,33 @@ export const MovieFeed = () => {
   }
 
   return (
-    <div className="movie-feed">
-      <MovieSearchBar onSearch={handleSearch} onGenreChange={handleGenreChange} />
-      <div className="movie-grid">
-        {movies.map(movie => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
-      </div>
-      {!search && totalPages > 1 && (
-        <div className="pagination">
-          <button 
-            onClick={handlePreviousPage} 
-            disabled={currentPage === 0}
-          >
-            Previous
-          </button>
-          <span>Page {currentPage + 1} of {totalPages}</span>
-          <button 
-            onClick={handleNextPage} 
-            disabled={currentPage === totalPages - 1}
-          >
-            Next
-          </button>
+    <>
+      <Header user={user} onLogout={handleLogout} />
+      <div className="movie-feed">
+        <MovieSearchBar onSearch={handleSearch} onGenreChange={handleGenreChange} />
+        <div className="movie-grid">
+          {movies.map(movie => (
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
         </div>
-      )}
-    </div>
+        {!search && totalPages > 1 && (
+          <div className="pagination">
+            <button 
+              onClick={handlePreviousPage} 
+              disabled={currentPage === 0}
+            >
+              Previous
+            </button>
+            <span>Page {currentPage + 1} of {totalPages}</span>
+            <button 
+              onClick={handleNextPage} 
+              disabled={currentPage === totalPages - 1}
+            >
+              Next
+            </button>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
