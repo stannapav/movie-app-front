@@ -10,11 +10,11 @@ interface Props {
 export const MovieSearchBar = ({ onSearch, onGenreChange }: Props) => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [search, setSearch] = useState("");
-  const [selectedGenre, setSelectedGenre] = useState<number | "">( "");
+  const [selectedGenre, setSelectedGenre] = useState<number | "">("");
 
   useEffect(() => {
     fetch("http://localhost:8080/api/genres")
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setGenres);
   }, []);
 
@@ -35,13 +35,19 @@ export const MovieSearchBar = ({ onSearch, onGenreChange }: Props) => {
         type="text"
         placeholder="Search movies by name..."
         value={search}
-        onChange={e => setSearch(e.target.value)}
+        onChange={(e) => setSearch(e.target.value)}
         className="movie-search-input"
       />
-      <select value={selectedGenre} onChange={handleGenreChange} className="movie-search-select">
+      <select
+        value={selectedGenre}
+        onChange={handleGenreChange}
+        className="movie-search-select"
+      >
         <option value="">All Genres</option>
-        {genres.map(g => (
-          <option key={g.id} value={g.id}>{g.name}</option>
+        {genres.map((g) => (
+          <option key={g.id} value={g.id}>
+            {g.name}
+          </option>
         ))}
       </select>
       <button type="submit" className="movie-search-button">
